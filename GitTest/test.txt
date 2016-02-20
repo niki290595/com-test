@@ -1,3 +1,7 @@
 class hello-world {
 
 }
+
+class bue-world {
+
+}
