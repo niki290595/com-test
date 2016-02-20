@@ -1,7 +1,8 @@
 class hello-world {
-
+	sout("hello my friend");
 }
 
 class bue-world {
 
 }
+
