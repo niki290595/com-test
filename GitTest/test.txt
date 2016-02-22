@@ -1,9 +1,0 @@
-class hello-world {
-//
-	sout("hello my friend;;;");
-	sout("bye my friend;;;");
-}
-
-class bue-world {
-//
-}
