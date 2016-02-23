@@ -1,6 +1,5 @@
 #include "interfaces.h"
 #include "iid.h"
-//#include <sstream>
 #include <iostream>
 
 class CoCar : public IEngine, public ICreateCar, public IStats {
@@ -12,7 +11,7 @@ private:
 	static const int MAX_SPEED = 400;
 	static const int MAX_NAME_LENGTH = 100;
 
-public: 
+public:
 	CoCar();
 	virtual ~CoCar();
 
@@ -36,11 +35,16 @@ public:
 
 };
 
+
+extern DWORD g_objCount;
+
 CoCar::CoCar() : m_refCount(0), m_currSpeed(0), m_maxSpeed(0) {
 	m_petName = SysAllocString(L"Default Pet Name");
+	g_objCount++;
 }
 
 CoCar::~CoCar() {
+	g_objCount--;
 	if (m_petName) SysFreeString(m_petName);
 	MessageBox(NULL, (LPCWSTR)"CoCar is dead", (LPCWSTR)"Destructor", MB_OK | MB_SETFOREGROUND);
 }
@@ -103,7 +107,7 @@ STDMETHODIMP CoCar::DisplayStats() {
 	WideCharToMultiByte(CP_ACP, NULL, m_petName, -1, buff, MAX_NAME_LENGTH, NULL, NULL);
 	MessageBox(NULL, (LPCWSTR)buff, (LPCWSTR)"Pet Name", MB_OK | MB_SETFOREGROUND);
 	memset(buff, 0, sizeof(buff));
-	sprintf(buff, "%d", m_maxSpeed);
+	sprintf_s(buff, "%d", m_maxSpeed);
 	MessageBox(NULL, (LPCWSTR)buff, (LPCWSTR)"MAX Speed", MB_OK | MB_SETFOREGROUND);
 	return S_OK;
 }

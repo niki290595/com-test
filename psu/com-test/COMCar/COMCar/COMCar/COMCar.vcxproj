@@ -150,7 +150,9 @@
     <ClInclude Include="interfaces.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CarlnProcServer.cpp" />
     <ClCompile Include="CoCar.cpp" />
+    <ClCompile Include="CoCarClassFactory.cpp" />
     <ClCompile Include="iid.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
