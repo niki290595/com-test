@@ -15,7 +15,7 @@ DECLARE_INTERFACE_(IStats, IUnknown) {
 DECLARE_INTERFACE_(IEngine, IUnknown) {
 	STDMETHOD(SpeedUp) () PURE;
 	STDMETHOD(GetMaxSpeed) (int *maxSpeed) PURE;
-	STDMETHOD(GetCurrentSpeed) (int *curSpeed) PURE;
+	STDMETHOD(GetCurSpeed) (int *curSpeed) PURE;
 };
 
 //ICreateCar используется для присвоения имени реализуемому

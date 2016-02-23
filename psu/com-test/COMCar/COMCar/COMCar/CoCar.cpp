@@ -1,9 +1,16 @@
 #include "interfaces.h"
 #include "iid.h"
+//#include <sstream>
+#include <iostream>
 
 class CoCar : public IEngine, public ICreateCar, public IStats {
 private:
 	ULONG m_refCount;
+	BSTR m_petName; //инициализация через SysAllocString(), удаление через SysFreeString()
+	int m_maxSpeed;
+	int m_currSpeed;
+	static const int MAX_SPEED = 400;
+	static const int MAX_NAME_LENGTH = 100;
 
 public: 
 	CoCar();
@@ -29,14 +36,16 @@ public:
 
 };
 
-CoCar::CoCar() {
-	m_refCount = 0;
+CoCar::CoCar() : m_refCount(0), m_currSpeed(0), m_maxSpeed(0) {
+	m_petName = SysAllocString(L"Default Pet Name");
 }
 
 CoCar::~CoCar() {
-
+	if (m_petName) SysFreeString(m_petName);
+	MessageBox(NULL, (LPCWSTR)"CoCar is dead", (LPCWSTR)"Destructor", MB_OK | MB_SETFOREGROUND);
 }
 
+//IUnknown
 STDMETHODIMP_(DWORD) CoCar::AddRef() {
 	return ++m_refCount;
 }
@@ -67,3 +76,45 @@ STDMETHODIMP CoCar::QueryInterface(REFIID riid, void **pIFace) {
 	return S_OK;
 }
 
+//IEngine
+STDMETHODIMP CoCar::SpeedUp() {
+	m_currSpeed += 10;
+	return S_OK;
+}
+
+STDMETHODIMP CoCar::GetMaxSpeed(int *maxSpeed) {
+	*maxSpeed = m_maxSpeed;
+	return S_OK;
+}
+
+STDMETHODIMP CoCar::GetCurSpeed(int *curSpeed) {
+	*curSpeed = m_currSpeed;
+	return S_OK;
+}
+
+//IStats
+STDMETHODIMP CoCar::GetPetName(BSTR * petName) {
+	*petName = SysAllocString(m_petName);
+	return S_OK;
+}
+
+STDMETHODIMP CoCar::DisplayStats() {
+	char buff[MAX_NAME_LENGTH];
+	WideCharToMultiByte(CP_ACP, NULL, m_petName, -1, buff, MAX_NAME_LENGTH, NULL, NULL);
+	MessageBox(NULL, (LPCWSTR)buff, (LPCWSTR)"Pet Name", MB_OK | MB_SETFOREGROUND);
+	memset(buff, 0, sizeof(buff));
+	sprintf(buff, "%d", m_maxSpeed);
+	MessageBox(NULL, (LPCWSTR)buff, (LPCWSTR)"MAX Speed", MB_OK | MB_SETFOREGROUND);
+	return S_OK;
+}
+
+//ICreateCar
+STDMETHODIMP CoCar::SetPetName(BSTR petName) {
+	SysReAllocString(&m_petName, petName);
+	return S_OK;
+}
+
+STDMETHODIMP CoCar::SetMaxSpeed(int maxSpeed) {
+	if (maxSpeed < MAX_SPEED) m_maxSpeed = maxSpeed;
+	return S_OK;
+}
