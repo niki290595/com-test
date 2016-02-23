@@ -23,6 +23,6 @@ DECLARE_INTERFACE_(IEngine, IUnknown) {
 DECLARE_INTERFACE_(ICreateCar, IUnknown) {
 	STDMETHOD(SetPetName) (BSTR petName) PURE;
 	STDMETHOD(SetMaxSpeed) (int maxSpeed) PURE;
-}
+};
 
 #endif // !_INTERFACES
