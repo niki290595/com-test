@@ -155,6 +155,10 @@
     <ClCompile Include="CoCarClassFactory.cpp" />
     <ClCompile Include="iid.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="comcar.def" />
+    <None Include="carinprocserver.reg" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
