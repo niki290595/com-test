@@ -1,5 +1,5 @@
 #include <windows.h>
-#include "CoCarClassFactory.cpp"
+#include "CoCarClassFactory.h"
 
 ULONG g_lockCount = 0; //кол-во блокировок сервера
 ULONG g_objCount = 0; //кол-во живых объектов в сервере
