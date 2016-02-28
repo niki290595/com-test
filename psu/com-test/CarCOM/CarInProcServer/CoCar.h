@@ -9,7 +9,7 @@ private:
 	BSTR m_petName; //инициализация через SysAllocString(), удаление через SysFreeString()
 	int m_maxSpeed;
 	int m_currSpeed;
-	static const int MAX_SPEED = 100;
+	static const int MAX_SPEED = 300;
 	static const int MAX_NAME_LENGTH = 100;
 
 public:

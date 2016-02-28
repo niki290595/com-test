@@ -1,14 +1,8 @@
 #include "CoCar.h"
+#include <string.h>
+#include <stdlib.h>
 
 extern DWORD g_objCount;
-
-template <typename T>
-string NumberToString(T pNumber)
-{
-	ostringstream oOStrStream;
-	oOStrStream << pNumber;
-	return oOStrStream.str();
-}
 
 CoCar::CoCar() : m_refCount(0), m_currSpeed(0), m_maxSpeed(0) {
 	m_petName = SysAllocString(OLESTR("MERS"));
@@ -75,13 +69,10 @@ STDMETHODIMP CoCar::GetPetName(BSTR * petName) {
 }
 
 STDMETHODIMP CoCar::DisplayStats() {
-	char buff[MAX_NAME_LENGTH];
-	WideCharToMultiByte(CP_ACP, NULL, m_petName, -1, buff, MAX_NAME_LENGTH, NULL, NULL);
-
 	MessageBox(NULL, (LPCWSTR) m_petName, L"Pet Name", MB_OK | MB_SETFOREGROUND);
-	memset(buff, 0, sizeof(buff));
-	sprintf_s(buff, "%d", m_maxSpeed);
-	MessageBox(NULL, (LPCWSTR) NumberToString(m_maxSpeed), L"MAX Speed", MB_OK | MB_SETFOREGROUND);
+	char buf[10];
+	itoa(m_maxSpeed, buf, 10);
+	MessageBoxA(NULL, buf, "MAX Speed", MB_OK | MB_SETFOREGROUND);
 	return S_OK;
 }
 
