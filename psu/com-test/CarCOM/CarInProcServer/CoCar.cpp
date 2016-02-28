@@ -70,12 +70,12 @@ STDMETHODIMP CoCar::DisplayStats() {
 	char buff[MAX_NAME_LENGTH];
 	WideCharToMultiByte(CP_ACP, NULL, m_petName, -1, buff, MAX_NAME_LENGTH, NULL, NULL);
 
-	MessageBox(NULL, L"Handed out ICreateCarr", L"QI", MB_OK | MB_SETFOREGROUND);
-	//MessageBox(NULL, buff, L"Pet Name", MB_OK | MB_SETFOREGROUND);
+	MessageBox(NULL, (LPCWSTR) buff, L"Pet Name", MB_OK | MB_SETFOREGROUND);
+	MessageBox(NULL, (LPCWSTR) m_petName, L"Pet Name", MB_OK | MB_SETFOREGROUND);
 	memset(buff, 0, sizeof(buff));
 	sprintf_s(buff, "%d", m_maxSpeed);
-	MessageBox(NULL, L"Handed out ICreateCarr", L"QI", MB_OK | MB_SETFOREGROUND);
-	//MessageBox(NULL, buff, L"MAX Speed", MB_OK | MB_SETFOREGROUND);
+	MessageBox(NULL, (LPCWSTR) buff, L"MAX Speed", MB_OK | MB_SETFOREGROUND);
+	MessageBox(NULL, (LPCWSTR) m_maxSpeed, L"MAX Speed", MB_OK | MB_SETFOREGROUND);
 	return S_OK;
 }
 
