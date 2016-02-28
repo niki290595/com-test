@@ -17,7 +17,7 @@ int main() {
 	pCF->Release();
 
 	if (SUCCEEDED(hr)) {
-		pICreateCar->SetMaxSpeed(30); BSTR petName = SysAllocString(L"Shazzam!");
+		pICreateCar->SetMaxSpeed(40); BSTR petName = SysAllocString(L"Mers!");
 		pICreateCar->SetPetName(petName);
 		SysFreeString(petName);
 
