@@ -125,4 +125,12 @@ public class UserEntity {
         result = 31 * result + (dateModification != null ? dateModification.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "UserEntity{" +
+                "login='" + login + '\'' +
+                ", category=" + category +
+                '}';
+    }
 }
