@@ -7,15 +7,25 @@ import java.sql.Date;
  * Created by Ilya on 06.03.2016.
  */
 @Entity
-@Table(name = "user", schema = "usersdb", catalog = "")
+@Table(name = "user", schema = "usersdb")
 public class UserEntity {
     private Integer id;
     private String login;
     private String pass;
-    private Integer idcategory;
+    private CategoryEntity category;
     private String salt;
     private Date dateCreation;
     private Date dateModification;
+
+    public UserEntity() {}
+
+    public UserEntity(String login, String pass, CategoryEntity category, String salt, Date dateCreation) {
+        this.login = login;
+        this.pass = pass;
+        this.category = category;
+        this.salt = salt;
+        this.dateCreation = dateCreation;
+    }
 
     @Id
     @Column(name = "id", nullable = false)
@@ -47,14 +57,14 @@ public class UserEntity {
         this.pass = pass;
     }
 
-    @Basic
-    @Column(name = "idcategory", nullable = false)
-    public Integer getIdcategory() {
-        return idcategory;
+    @ManyToOne
+    @JoinColumn(name = "idcategory")
+    public CategoryEntity getCategory() {
+        return category;
     }
 
-    public void setIdcategory(Integer idcategory) {
-        this.idcategory = idcategory;
+    public void setCategory(CategoryEntity category) {
+        this.category = category;
     }
 
     @Basic
@@ -97,7 +107,7 @@ public class UserEntity {
         if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (login != null ? !login.equals(that.login) : that.login != null) return false;
         if (pass != null ? !pass.equals(that.pass) : that.pass != null) return false;
-        if (idcategory != null ? !idcategory.equals(that.idcategory) : that.idcategory != null) return false;
+        if (category != null ? !category.equals(that.category) : that.category != null) return false;
         if (salt != null ? !salt.equals(that.salt) : that.salt != null) return false;
         if (dateCreation != null ? !dateCreation.equals(that.dateCreation) : that.dateCreation != null) return false;
         return dateModification != null ? dateModification.equals(that.dateModification) : that.dateModification == null;
@@ -109,7 +119,7 @@ public class UserEntity {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (login != null ? login.hashCode() : 0);
         result = 31 * result + (pass != null ? pass.hashCode() : 0);
-        result = 31 * result + (idcategory != null ? idcategory.hashCode() : 0);
+        result = 31 * result + (category != null ? category.hashCode() : 0);
         result = 31 * result + (salt != null ? salt.hashCode() : 0);
         result = 31 * result + (dateCreation != null ? dateCreation.hashCode() : 0);
         result = 31 * result + (dateModification != null ? dateModification.hashCode() : 0);
