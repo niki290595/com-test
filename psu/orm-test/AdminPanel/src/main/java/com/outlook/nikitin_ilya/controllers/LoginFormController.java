@@ -1,5 +1,6 @@
 package com.outlook.nikitin_ilya.controllers;
 
+import com.outlook.nikitin_ilya.cryptography.HashText;
 import com.outlook.nikitin_ilya.hibernate.CategoryEntity;
 import com.outlook.nikitin_ilya.hibernate.Main;
 import com.outlook.nikitin_ilya.hibernate.UserEntity;
@@ -53,26 +54,24 @@ public class LoginFormController implements Initializable {
         if (user == null) {
             new Alert(Alert.AlertType.ERROR, "Пользователь не выбран",ButtonType.OK).showAndWait();
             //DialogHelper.getInstance().openErrorDialog("Пользователь не выбран", "Выберите ");
-        } else if (user.getPass().equals(HashText.sha256(pass, user.getSalt()))) {//(user.getPass().equals(pass)) {
-            DialogHelper.getInstance().openInformationDialog(
-                    "Добро пожаловать " + user.getLogin(),
-                    "Вы вошли как " + user.getCategory());
+        } else if (user.getPass().equals(HashText.getHash(pass, user.getSalt()))) {
+            new Alert(Alert.AlertType.INFORMATION, "Добро пожаловать " + user.getLogin(), ButtonType.OK).showAndWait();
 
-            CategoryEntity.Description description = CategoryEntity.Description.getRule(user.getCategory().getDescription());
-            switch (description) {
+            switch (user.getCategory().descriptionCONST()) {
                 case ADMIN:
-                    new AdminController(user.getLogin());
-                    break;
+                    //new AdminController(user.getLogin());
+                    //break;
                 case OWNER:
                 case STAFF:
-                    DialogHelper.getInstance().openInformationDialog("Работа программы завершена");
+                    new Alert(Alert.AlertType.INFORMATION, "Работа программы завершена", ButtonType.OK).showAndWait();
                     System.exit(0);
             }
         } else {
-            DialogHelper.getInstance().openErrorDialog("Авторизация не пройдена", "Пароль введен неверно");
+            new Alert(Alert.AlertType.ERROR, "Авторизация не пройдена, пароль введен неверно", ButtonType.OK).showAndWait();
         }
     }
 
     public void exit(ActionEvent actionEvent) {
+        System.exit(0);
     }
 }

@@ -54,4 +54,29 @@ public class CategoryEntity {
     public String toString() {
         return description;
     }
+
+    public enum Description {
+        ADMIN, OWNER, STAFF;
+
+        static int admin = "admin".hashCode();
+        static int owner = "owner".hashCode();
+        static int staff = "staff".hashCode();
+
+        public static Description getRule(String s) {
+            int hashCode = s.hashCode();
+            if (hashCode == admin) return ADMIN;
+            if (hashCode == owner) return OWNER;
+            if (hashCode == staff) return STAFF;
+            return null;
+        }
+    }
+
+    public Description descriptionCONST() {
+        int hashCode = this.getDescription().hashCode();
+        if (hashCode == Description.admin) return Description.ADMIN;
+        if (hashCode == Description.owner) return Description.OWNER;
+        if (hashCode == Description.staff) return Description.STAFF;
+        return null;
+    }
+
 }

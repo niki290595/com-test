@@ -34,6 +34,10 @@ public class HashText {
         return md5Hex;
     }
 
+    public static void main(String[] args) {
+        System.out.println(getHash("1111", "s2v681052t7ijnsuv7h4d00bgu"));
+    }
+
     /*
 
     public static String sha256(String pass, String salt) {
