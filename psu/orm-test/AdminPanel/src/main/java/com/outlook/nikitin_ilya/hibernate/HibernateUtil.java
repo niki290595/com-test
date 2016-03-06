@@ -1,23 +1,46 @@
 package com.outlook.nikitin_ilya.hibernate;
 
-import org.hibernate.HibernateException;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.metadata.ClassMetadata;
-import org.hibernate.service.ServiceRegistry;
-import org.hibernate.service.ServiceRegistryBuilder;
-
-import java.util.Map;
 
 /**
  * Created by Ilya on 06.03.2016.
  */
 public class HibernateUtil {
+    private static final SessionFactory sessionFactory;
+
+    static {
+        final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
+        try {
+            sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+        } catch (Throwable ex) {
+            System.err.println("Initial SessionFactory creation failed." + ex);
+            throw new ExceptionInInitializerError(ex);
+        }
+    }
+
+    public static SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
+
+    public static Session getSession() {
+        return sessionFactory.openSession();
+    }
+
+
+
+
+
+
+
+    /* old version
     private static final SessionFactory ourSessionFactory;
     private static final ServiceRegistry serviceRegistry;
 
+    /* old version
     static {
         try {
             Configuration configuration = new Configuration();
@@ -32,6 +55,10 @@ public class HibernateUtil {
 
     public static Session getSession() throws HibernateException {
         return ourSessionFactory.openSession();
+    }
+
+    public static SessionFactory getSessionFactory() throws HibernateException {
+        return ourSessionFactory;
     }
 
     public static void main(final String[] args) throws Exception {
@@ -52,5 +79,5 @@ public class HibernateUtil {
             session.close();
         }
     }
-
+    */
 }

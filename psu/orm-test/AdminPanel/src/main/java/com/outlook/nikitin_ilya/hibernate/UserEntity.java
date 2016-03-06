@@ -8,7 +8,7 @@ import java.sql.Date;
  */
 @Entity
 @Table(name = "user", schema = "usersdb")
-public class UserEntity {
+public class UserEntity implements Comparable<UserEntity> {
     private Integer id;
     private String login;
     private String pass;
@@ -132,5 +132,9 @@ public class UserEntity {
                 "login='" + login + '\'' +
                 ", category=" + category +
                 '}';
+    }
+
+    public int compareTo(UserEntity o) {
+        return this.getLogin().compareTo(o.getLogin());
     }
 }

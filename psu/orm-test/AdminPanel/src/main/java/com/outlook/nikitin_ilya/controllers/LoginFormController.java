@@ -1,5 +1,6 @@
 package com.outlook.nikitin_ilya.controllers;
 
+import com.outlook.nikitin_ilya.hibernate.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -18,6 +19,7 @@ import java.util.ResourceBundle;
  */
 public class LoginFormController implements Initializable {
     private static Stage stage;
+    private static Main db;
 
     public ComboBox loginCBox;
     public PasswordField passTextField;
@@ -34,7 +36,8 @@ public class LoginFormController implements Initializable {
     }
 
     public void initialize(URL location, ResourceBundle resources) {
-
+        db = Main.INSTANCE;
+        loginCBox.setItems(db.getUserData());
     }
 
     public void registration(ActionEvent actionEvent) {
