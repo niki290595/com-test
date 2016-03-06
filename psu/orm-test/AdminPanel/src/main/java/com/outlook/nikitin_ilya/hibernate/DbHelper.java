@@ -14,4 +14,12 @@ public enum DbHelper {
             return session.createQuery("from UserEntity").list();
         }
     }
+
+    public List<CategoryEntity> getCategoryData() {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            return session.createQuery("from CategoryEntity").list();
+        }
+    }
+
+
 }

@@ -7,7 +7,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "category", schema = "usersdb")
-public class CategoryEntity {
+public class CategoryEntity implements Comparable<CategoryEntity> {
     private Integer id;
     private String description;
 
@@ -79,4 +79,8 @@ public class CategoryEntity {
         return null;
     }
 
+    @Override
+    public int compareTo(CategoryEntity o) {
+        return this.getDescription().compareTo(o.getDescription());
+    }
 }

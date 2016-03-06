@@ -43,7 +43,8 @@ public class LoginFormController implements Initializable {
         loginCBox.setItems(db.getUserData());
     }
 
-    public void registration(ActionEvent actionEvent) {
+    public void registration(ActionEvent actionEvent) throws IOException {
+        new RegistrationController(stage);
     }
 
     public void enter(ActionEvent actionEvent) throws IOException {

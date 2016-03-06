@@ -128,10 +128,7 @@ public class UserEntity implements Comparable<UserEntity> {
 
     @Override
     public String toString() {
-        return "UserEntity{" +
-                "login='" + login + '\'' +
-                ", category=" + category +
-                '}';
+        return login;
     }
 
     public int compareTo(UserEntity o) {
