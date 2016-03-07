@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ee9df655-03af-4311-96fc-3d9240060b71" name="Default" comment="add project">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Main.java" afterPath="$PROJECT_DIR$/src/main/java/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/outlook/nikitin_ilya/controllers/LoginFormController.java" afterPath="$PROJECT_DIR$/src/main/java/com/outlook/nikitin_ilya/controllers/LoginFormController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/outlook/nikitin_ilya/controllers/RegistrationController.java" afterPath="$PROJECT_DIR$/src/main/java/com/outlook/nikitin_ilya/controllers/RegistrationController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/outlook/nikitin_ilya/hibernate/CategoryEntity.java" afterPath="$PROJECT_DIR$/src/main/java/com/outlook/nikitin_ilya/hibernate/CategoryEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/outlook/nikitin_ilya/hibernate/DbHelper.java" afterPath="$PROJECT_DIR$/src/main/java/com/outlook/nikitin_ilya/hibernate/DbHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/outlook/nikitin_ilya/hibernate/Main.java" afterPath="$PROJECT_DIR$/src/main/java/com/outlook/nikitin_ilya/hibernate/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/views/login.form.fxml" afterPath="$PROJECT_DIR$/src/main/resources/views/login.form.fxml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/views/registration.fxml" afterPath="$PROJECT_DIR$/src/main/resources/views/registration.form.fxml" />
-    </list>
+    <list default="true" id="ee9df655-03af-4311-96fc-3d9240060b71" name="Default" comment="add project" />
     <ignored path="Admin Panel.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -78,8 +68,8 @@
       <file leaf-file-name="LoginFormController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/outlook/nikitin_ilya/controllers/LoginFormController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.4879154">
-              <caret line="74" column="27" selection-start-line="74" selection-start-column="27" selection-end-line="74" selection-end-column="27" />
+            <state vertical-scroll-proportion="0.17824773">
+              <caret line="21" column="24" selection-start-line="21" selection-start-column="24" selection-end-line="21" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -990,12 +980,12 @@
       <workItem from="1457245423621" duration="13159000" />
       <workItem from="1457280921761" duration="6709000" />
       <workItem from="1457320969799" duration="51000" />
-      <workItem from="1457321122873" duration="15431000" />
+      <workItem from="1457321122873" duration="15506000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="37162000" />
+    <option name="totallyTimeSpent" value="37237000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -1009,7 +999,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2524377" sideWeight="0.42910448" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2524377" sideWeight="0.5708955" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2524377" sideWeight="0.5708955" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17526881" sideWeight="0.3432836" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1522,8 +1512,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/outlook/nikitin_ilya/controllers/LoginFormController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.4879154">
-          <caret line="74" column="27" selection-start-line="74" selection-start-column="27" selection-end-line="74" selection-end-column="27" />
+        <state vertical-scroll-proportion="0.17824773">
+          <caret line="21" column="24" selection-start-line="21" selection-start-column="24" selection-end-line="21" selection-end-column="24" />
           <folding />
         </state>
       </provider>
