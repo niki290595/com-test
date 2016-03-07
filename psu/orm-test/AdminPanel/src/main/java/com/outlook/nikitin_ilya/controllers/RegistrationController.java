@@ -5,8 +5,6 @@ import com.outlook.nikitin_ilya.cryptography.SaltGenerator;
 import com.outlook.nikitin_ilya.hibernate.CategoryEntity;
 import com.outlook.nikitin_ilya.hibernate.Main;
 import com.outlook.nikitin_ilya.hibernate.UserEntity;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -20,6 +18,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import com.outlook.nikitin_ilya.hibernate.CategoryEntity.CategoryType;
 
 /**
  * Created by Ilya on 06.03.2016.
@@ -29,7 +28,6 @@ public class RegistrationController implements Initializable {
     private static Main db;
 
     public TextField loginTEdit;
-    public ComboBox<CategoryEntity> categoryCBox;
     public PasswordField passTEdit;
     public PasswordField repeatPassTEdit;
     public Circle repeatPassCircle;
@@ -39,7 +37,7 @@ public class RegistrationController implements Initializable {
     }
 
     public RegistrationController(Stage parentStage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("views/registration.fxml"));
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("views/registration.form.fxml"));
         stage = new Stage();
         stage.setTitle("Регистрация");
         stage.setScene(new Scene(root, 400, 200));
@@ -49,11 +47,6 @@ public class RegistrationController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         db = Main.INSTANCE;
-        categoryCBox.setItems(db.getCategoryData());
-        categoryCBox.getItems().stream().filter(category -> category.getDescription().equals("staff")).forEach(category -> {
-            categoryCBox.getSelectionModel().select(category);
-        });
-        categoryCBox.setVisible(false);
 
         loginTEdit.textProperty().addListener((observable, oldValue, newValue) -> {
             checkLogin(newValue);
@@ -83,7 +76,12 @@ public class RegistrationController implements Initializable {
 
         String login = loginTEdit.getText();
         String pass = passTEdit.getText();
-        CategoryEntity category = categoryCBox.getSelectionModel().getSelectedItem();
+        CategoryEntity category = null;
+        for (CategoryEntity categoryEntity : db.getCategoryData()) {
+            if (categoryEntity.categoryType().equals(CategoryType.STAFF)) {
+                category = categoryEntity;
+            }
+        }
         String salt = SaltGenerator.generate();
 
         db.addUser(login, HashText.getHash(pass, salt), category, salt);

@@ -35,7 +35,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <ComboBox fx:id="loginCBox" maxWidth="350.0" minWidth="350.0" promptText="Логин" GridPane.halignment="CENTER" />
+                        <ComboBox fx:id="loginCBox" maxWidth="350.0" minWidth="350.0" GridPane.halignment="CENTER" />
                         <PasswordField fx:id="passTextField" maxWidth="350.0" promptText="Пароль" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
                     </children>
                 </GridPane>

@@ -55,14 +55,14 @@ public class CategoryEntity implements Comparable<CategoryEntity> {
         return description;
     }
 
-    public enum Description {
+    public enum CategoryType {
         ADMIN, OWNER, STAFF;
 
         static int admin = "admin".hashCode();
         static int owner = "owner".hashCode();
         static int staff = "staff".hashCode();
 
-        public static Description getRule(String s) {
+        public static CategoryType get(String s) {
             int hashCode = s.hashCode();
             if (hashCode == admin) return ADMIN;
             if (hashCode == owner) return OWNER;
@@ -71,11 +71,11 @@ public class CategoryEntity implements Comparable<CategoryEntity> {
         }
     }
 
-    public Description descriptionCONST() {
+    public CategoryType categoryType() {
         int hashCode = this.getDescription().hashCode();
-        if (hashCode == Description.admin) return Description.ADMIN;
-        if (hashCode == Description.owner) return Description.OWNER;
-        if (hashCode == Description.staff) return Description.STAFF;
+        if (hashCode == CategoryType.admin) return CategoryType.ADMIN;
+        if (hashCode == CategoryType.owner) return CategoryType.OWNER;
+        if (hashCode == CategoryType.staff) return CategoryType.STAFF;
         return null;
     }
 

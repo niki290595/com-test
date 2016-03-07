@@ -1,7 +1,6 @@
 package com.outlook.nikitin_ilya.controllers;
 
 import com.outlook.nikitin_ilya.cryptography.HashText;
-import com.outlook.nikitin_ilya.hibernate.CategoryEntity;
 import com.outlook.nikitin_ilya.hibernate.Main;
 import com.outlook.nikitin_ilya.hibernate.UserEntity;
 import javafx.event.ActionEvent;
@@ -11,7 +10,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import javafx.util.Pair;
 
 import java.io.IOException;
 import java.net.URL;
@@ -23,6 +21,10 @@ import java.util.ResourceBundle;
 public class LoginFormController implements Initializable {
     private static Stage stage;
     private static Main db;
+
+    static {
+        db = Main.INSTANCE;
+    }
 
     public ComboBox<UserEntity> loginCBox;
     public PasswordField passTextField;
@@ -39,7 +41,6 @@ public class LoginFormController implements Initializable {
     }
 
     public void initialize(URL location, ResourceBundle resources) {
-        db = Main.INSTANCE;
         loginCBox.setItems(db.getUserData());
     }
 
@@ -48,20 +49,29 @@ public class LoginFormController implements Initializable {
     }
 
     public void enter(ActionEvent actionEvent) throws IOException {
-        tryAuthorization(loginCBox.getSelectionModel().getSelectedItem(), passTextField.getText());
+        UserEntity user = loginCBox.getSelectionModel().getSelectedItem();
+        String pass = passTextField.getText();
+
+        if (pass.length() == 0) {
+            new CreatePassFormController(stage, loginCBox.getSelectionModel().getSelectedItem());
+            pass = CreatePassFormController.newPass;
+            user = db.getUser(user.getLogin());
+        }
+
+        tryAuthorization(user, pass);
     }
 
     private void tryAuthorization(UserEntity user, String pass) throws IOException {
         if (user == null) {
             new Alert(Alert.AlertType.ERROR, "Пользователь не выбран",ButtonType.OK).showAndWait();
-            //DialogHelper.getInstance().openErrorDialog("Пользователь не выбран", "Выберите ");
         } else if (user.getPass().equals(HashText.getHash(pass, user.getSalt()))) {
             new Alert(Alert.AlertType.INFORMATION, "Добро пожаловать " + user.getLogin(), ButtonType.OK).showAndWait();
 
-            switch (user.getCategory().descriptionCONST()) {
+            switch (user.getCategory().categoryType()) {
                 case ADMIN:
-                    //new AdminController(user.getLogin());
-                    //break;
+                    stage.hide();
+                    new AdminFormController(stage, user.getLogin());
+                    break;
                 case OWNER:
                 case STAFF:
                     new Alert(Alert.AlertType.INFORMATION, "Работа программы завершена", ButtonType.OK).showAndWait();

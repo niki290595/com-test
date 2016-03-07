@@ -1,5 +1,7 @@
 package com.outlook.nikitin_ilya.hibernate;
 
+import com.outlook.nikitin_ilya.cryptography.HashText;
+import com.outlook.nikitin_ilya.cryptography.SaltGenerator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -34,11 +36,6 @@ public enum Main {
     private ObservableList<UserEntity> initUserData() {
         userData = addCollection(dbHelper.getUsersData());
         return userData;
-        /*
-        userData = FXCollections.observableArrayList();
-        userData.addAll(dbHelper.getUsersData());
-        Collections.sort(userData);
-        return userData;*/
     }
 
     public UserEntity getUser(String login) {
@@ -57,6 +54,34 @@ public enum Main {
         return newUser;
     }
 
+    public UserEntity addUser(String login, CategoryEntity category) {
+        UserEntity newUser = dbHelper.addUser(login, category);
+        userData.add(newUser);
+        Collections.sort(userData);
+        return newUser;
+    }
+
+    public void editUser(UserEntity user, String newLogin, CategoryEntity newCategory) {
+        UserEntity alterUser = dbHelper.editUser(user, newLogin, newCategory);
+        userData.remove(user);
+        userData.add(alterUser);
+        Collections.sort(userData);
+    }
+
+
+    public void editUser(UserEntity user, String pass) {
+        String salt = SaltGenerator.generate();
+        UserEntity alterUser = dbHelper.editUser(user, HashText.getHash(pass, salt), salt);
+        userData.remove(user);
+        userData.add(alterUser);
+        Collections.sort(userData);
+    }
+
+    public void removeUser(UserEntity user) {
+        dbHelper.removeUser(user);
+        userData.remove(user);
+    }
+
     public ObservableList<CategoryEntity> getCategoryData() {
         return categoryData == null ? initCategoryData() : categoryData;
     }
@@ -70,5 +95,6 @@ public enum Main {
         Collections.sort(categoryData);
         return categoryData;*/
     }
+
 
 }
