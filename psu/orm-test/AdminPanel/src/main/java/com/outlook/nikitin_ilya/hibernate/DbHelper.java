@@ -1,6 +1,8 @@
 package com.outlook.nikitin_ilya.hibernate;
 
 import org.hibernate.Session;
+
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -12,6 +14,16 @@ public enum DbHelper {
     public List<UserEntity> getUsersData() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return session.createQuery("from UserEntity").list();
+        }
+    }
+
+    public UserEntity addUser(String login, String pass, CategoryEntity category, String salt) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            session.beginTransaction();
+            UserEntity user = new UserEntity(login, pass, category, salt, new java.sql.Date(Calendar.getInstance().getTime().getTime()));
+            user.setId((Integer) session.save(user));
+            session.getTransaction().commit();
+            return user;
         }
     }
 

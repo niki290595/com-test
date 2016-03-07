@@ -7,5 +7,9 @@
       <schema-pattern>usersdb.*</schema-pattern>
       <default-schemas>usersdb.*</default-schemas>
     </data-source>
+    <data-source name="hibernate.cfg.xml/Hibernate" uuid="21edb543-5058-4bae-a63f-ff62fe094afb">
+      <user-name>root</user-name>
+      <user-password>df9bdf9bdf9bdf9b</user-password>
+    </data-source>
   </component>
 </project>

@@ -24,17 +24,37 @@ public enum Main {
         return userData == null ? initUserData() : userData;
     }
 
-    private void normalize(ObservableList observableList, List list) {
-        userData = FXCollections.observableArrayList();
-        userData.addAll(dbHelper.getUsersData());
-        Collections.sort(userData);
+    private ObservableList addCollection(List list) {
+        ObservableList observableList = FXCollections.observableArrayList();
+        observableList.addAll(list);
+        Collections.sort(observableList);
+        return observableList;
     }
 
     private ObservableList<UserEntity> initUserData() {
+        userData = addCollection(dbHelper.getUsersData());
+        return userData;
+        /*
         userData = FXCollections.observableArrayList();
         userData.addAll(dbHelper.getUsersData());
         Collections.sort(userData);
-        return userData;
+        return userData;*/
+    }
+
+    public UserEntity getUser(String login) {
+        for (UserEntity user : getUserData()) {
+            if (user.getLogin().equals(login)) {
+                return user;
+            }
+        }
+        return null;
+    }
+
+    public UserEntity addUser(String login, String hash, CategoryEntity category, String salt) {
+        UserEntity newUser = dbHelper.addUser(login, hash, category, salt);
+        userData.add(newUser);
+        Collections.sort(userData);
+        return newUser;
     }
 
     public ObservableList<CategoryEntity> getCategoryData() {
@@ -42,9 +62,13 @@ public enum Main {
     }
 
     private ObservableList<CategoryEntity> initCategoryData() {
+        categoryData = addCollection(dbHelper.getCategoryData());
+        return categoryData;
+        /*
         categoryData = FXCollections.observableArrayList();
         categoryData.addAll(dbHelper.getCategoryData());
         Collections.sort(categoryData);
-        return categoryData;
+        return categoryData;*/
     }
+
 }

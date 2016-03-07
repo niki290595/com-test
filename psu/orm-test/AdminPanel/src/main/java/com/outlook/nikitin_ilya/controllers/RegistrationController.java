@@ -1,16 +1,19 @@
 package com.outlook.nikitin_ilya.controllers;
 
+import com.outlook.nikitin_ilya.cryptography.HashText;
+import com.outlook.nikitin_ilya.cryptography.SaltGenerator;
 import com.outlook.nikitin_ilya.hibernate.CategoryEntity;
 import com.outlook.nikitin_ilya.hibernate.Main;
 import com.outlook.nikitin_ilya.hibernate.UserEntity;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
@@ -47,12 +50,64 @@ public class RegistrationController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         db = Main.INSTANCE;
         categoryCBox.setItems(db.getCategoryData());
+        categoryCBox.getItems().stream().filter(category -> category.getDescription().equals("staff")).forEach(category -> {
+            categoryCBox.getSelectionModel().select(category);
+        });
+        categoryCBox.setVisible(false);
+
+        loginTEdit.textProperty().addListener((observable, oldValue, newValue) -> {
+            checkLogin(newValue);
+        });
+        passTEdit.textProperty().addListener((observable, oldValue, newValue) -> {
+            checkPass(passTEdit.getText(), repeatPassTEdit.getText());
+        });
+        repeatPassTEdit.textProperty().addListener((observable, oldValue, newValue) -> {
+            checkPass(passTEdit.getText(), repeatPassTEdit.getText());
+        });
+    }
+
+    private void checkLogin(String login) {
+        UserEntity user = db.getUser(login);
+        loginCircle.setFill(user == null && login.length() != 0 ? Color.GREEN : Color.RED);
+    }
+
+    private void checkPass(String pass, String repeatPass) {
+        repeatPassCircle.setFill(pass.equals(repeatPass) ? Color.GREEN : Color.RED);
     }
 
     public void save(ActionEvent actionEvent) {
+        if (loginCircle.getFill().equals(Color.RED) || repeatPassCircle.getFill().equals(Color.RED)) {
+            new Alert(Alert.AlertType.ERROR, "Проверьте введенные данные", ButtonType.OK).showAndWait();
+            return;
+        }
+
+        String login = loginTEdit.getText();
+        String pass = passTEdit.getText();
+        CategoryEntity category = categoryCBox.getSelectionModel().getSelectedItem();
+        String salt = SaltGenerator.generate();
+
+        db.addUser(login, HashText.getHash(pass, salt), category, salt);
+        new Alert(Alert.AlertType.INFORMATION, "Пользователь создан", ButtonType.OK).showAndWait();
+        stage.hide();
+        /*
+
+        if (user == null) {
+            Main.getInstance().addUser(login, pass, category, salt);
+            DialogHelper.getInstance().openInformationDialog("Пользователь был создан");
+        } else {
+            //if (user.getPass().equals(pass))
+               // Main.getInstance().editUser(user, category, salt);
+            //else
+            Main.getInstance().editUser(user, pass, category, salt);
+            DialogHelper.getInstance().openInformationDialog("Пользователь был изменен");
+        }
+
+        cancel(actionEvent);
+        */
+
     }
 
     public void cancel(ActionEvent actionEvent) {
+        stage.hide();
     }
-
 }
