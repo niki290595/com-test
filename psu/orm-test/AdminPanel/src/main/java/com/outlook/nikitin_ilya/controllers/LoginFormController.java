@@ -52,7 +52,7 @@ public class LoginFormController implements Initializable {
         UserEntity user = loginCBox.getSelectionModel().getSelectedItem();
         String pass = passTextField.getText();
 
-        if (pass.length() == 0) {
+        if (pass.length() == 0 && user.getPass() == null) {
             new CreatePassFormController(stage, loginCBox.getSelectionModel().getSelectedItem());
             pass = CreatePassFormController.newPass;
             user = db.getUser(user.getLogin());

@@ -74,9 +74,12 @@ public enum DbHelper {
     public Collection getCategoryData() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return session.createCriteria(CategoryEntity.class).list();
-            //return session.createQuery("from CategoryEntity").list();
         }
     }
+            /*
+            //return session.createQuery("from CategoryEntity").list();
+        }
+    }*/
 
 
 

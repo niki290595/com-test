@@ -19,7 +19,10 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <TextField fx:id="loginTEdit" maxWidth="300.0" prefHeight="25.0" prefWidth="200.0" promptText="Логин" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES" />
+                <TextField fx:id="loginTEdit" maxWidth="300.0" prefHeight="25.0" promptText="Логин" GridPane.halignment="RIGHT" GridPane.hgrow="SOMETIMES" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
+               <GridPane.margin>
+                  <Insets right="15.0" />
+               </GridPane.margin></TextField>
                 <Circle fx:id="loginCircle" fill="#ff0000" radius="5.0" stroke="#000000" strokeType="INSIDE">
                     <GridPane.margin>
                         <Insets left="5.0" />
@@ -37,7 +40,20 @@
                         <Button cancelButton="true" mnemonicParsing="false" onAction="#cancel" prefWidth="150.0" text="Отмена" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                     </children>
                 </GridPane>
-            <ComboBox fx:id="categoryCBox" prefWidth="300.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+            <ComboBox fx:id="categoryCBox" prefWidth="300.0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets right="15.0" />
+               </GridPane.margin></ComboBox>
+            <Label text="Логин">
+               <GridPane.margin>
+                  <Insets left="25.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="Категория" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="25.0" />
+               </GridPane.margin>
+            </Label>
             </children>
         </GridPane>
     </children>

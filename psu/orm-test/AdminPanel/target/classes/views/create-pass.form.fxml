@@ -18,11 +18,17 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <PasswordField fx:id="passTEdit" maxWidth="300.0" prefWidth="300.0" promptText="Пароль" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                <PasswordField fx:id="repeatPassTEdit" maxWidth="300.0" prefWidth="300.0" promptText="Повторите пароль" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                <PasswordField fx:id="passTEdit" maxWidth="300.0" prefWidth="300.0" promptText="Пароль" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets left="15.0" />
+               </GridPane.margin></PasswordField>
+                <PasswordField fx:id="repeatPassTEdit" maxWidth="300.0" prefWidth="300.0" promptText="Повторите пароль" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets left="15.0" />
+               </GridPane.margin></PasswordField>
                 <Circle fx:id="repeatPassCircle" fill="#ff0000" layoutX="10.0" radius="5.0" stroke="#000000" strokeType="INSIDE" GridPane.rowIndex="1">
                <GridPane.margin>
-                  <Insets left="5.0" />
+                  <Insets left="15.0" />
                </GridPane.margin></Circle>
             <GridPane GridPane.rowIndex="2">
               <columnConstraints>
@@ -37,6 +43,11 @@
                       <Button cancelButton="true" maxWidth="150.0" mnemonicParsing="false" onAction="#exit" prefWidth="100.0" text="Выход" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                </children>
             </GridPane>
+            <Label text="Пароль">
+               <GridPane.margin>
+                  <Insets left="15.0" />
+               </GridPane.margin>
+            </Label>
             </children>
         </GridPane>
     </children>
