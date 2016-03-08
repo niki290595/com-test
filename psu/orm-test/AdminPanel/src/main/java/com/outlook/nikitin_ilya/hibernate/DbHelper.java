@@ -4,7 +4,7 @@ import org.hibernate.Session;
 
 import java.sql.Date;
 import java.util.Calendar;
-import java.util.List;
+import java.util.Collection;
 
 /**
  * Created by Ilya on 06.03.2016.
@@ -12,9 +12,9 @@ import java.util.List;
 public enum DbHelper {
     INSTANCE;
 
-    public List<UserEntity> getUsersData() {
+    public Collection getUsersData() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return (List<UserEntity>) session.createQuery("from UserEntity").list();
+            return session.createCriteria(UserEntity.class).list();
         }
     }
 
@@ -71,9 +71,10 @@ public enum DbHelper {
         }
     }
 
-    public List<CategoryEntity> getCategoryData() {
+    public Collection getCategoryData() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return (List<CategoryEntity>) session.createQuery("from CategoryEntity").list();
+            return session.createCriteria(CategoryEntity.class).list();
+            //return session.createQuery("from CategoryEntity").list();
         }
     }
 

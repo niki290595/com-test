@@ -5,6 +5,7 @@ import com.outlook.nikitin_ilya.cryptography.SaltGenerator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -26,9 +27,9 @@ public enum Main {
         return userData == null ? initUserData() : userData;
     }
 
-    private ObservableList addCollection(List list) {
+    private ObservableList addCollection(Collection collection) {
         ObservableList observableList = FXCollections.observableArrayList();
-        observableList.addAll(list);
+        observableList.addAll(collection);
         Collections.sort(observableList);
         return observableList;
     }
